@@ -1,13 +1,5 @@
-management:
-  endpoints:
-    web:
-      exposure:
-        include:
-          - health
-          - info
-
 server:
-  port: 8080
+  port: 23399
   compression:
     enabled: true
     mime-types: application/json,text/css,text/html
@@ -17,9 +9,6 @@ server:
   forward-headers-strategy: native
 
 spring:
-  jackson:
-    serialization:
-      write-dates-as-timestamps: false
   task:
     execution:
       thread-name-prefix: initializr-
@@ -29,6 +18,64 @@ spring:
         use-last-modified: false
 
 initializr:
+  types:
+    - name: Maven Project
+      id: maven-project
+      description: Generate a Maven based project archive
+      tags:
+        build: maven
+        format: project
+      default: true
+      action: /starter.zip
+    - name: Gradle Project
+      id: gradle-project
+      description: Generate a Gradle based project archive
+      tags:
+        build: gradle
+        format: project
+      default: false
+      action: /starter.zip
+  packagings:
+    - name: Jar
+      id: jar
+      default: true
+    - name: War
+      id: war
+      default: false
+  javaVersions:
+    - id: 1.8
+      name: 8
+      default: true
+    - id: 16
+      default: false
+    - id: 11
+      default: false
+  languages:
+    - name: Java
+      id: java
+      default: true
+    - name: Kotlin
+      id: kotlin
+      default: false
+  bootVersions:
+    - id: 2.6.3
+      name: 2.6.3
+      default: true
+    - id: 2.5.3
+      name: 2.5.3
+      default: false
+    - id: 2.4.9
+      name: 2.4.9
+      default: false
+    - id: 2.3.2.RELEASE
+      name: 2.3.2.RELEASE
+      default: false
+  group-id:
+    value: xin.vanilla
+  artifact-id:
+    value: my-app
+  version:
+    value: 1.0.0
   env:
     boms:
       azure:
@@ -1349,61 +1396,7 @@ initializr:
               href: https://cloud.spring.io/spring-cloud-gcp/reference/html/#spring-resources
             - rel: guide
               href: https://github.com/GoogleCloudPlatform/spring-cloud-gcp/tree/master/spring-cloud-gcp-samples/spring-cloud-gcp-storage-resource-sample
-  types:
-    - name: Maven Project
-      id: maven-project
-      description: Generate a Maven based project archive.
-      tags:
-        build: maven
-        format: project
-      default: true
-      action: /starter.zip
-    - name: Maven POM
-      id: maven-build
-      description: Generate a Maven pom.xml.
-      tags:
-        build: maven
-        format: build
-      default: false
-      action: /pom.xml
-  packagings:
-    - name: Jar
-      id: jar
-      default: true
-    - name: War
-      id: war
-      default: false
-  javaVersions:
-    - id: 16
-      default: false
-    - id: 11
-      default: false
-    - id: 1.8
-      name: 8
-      default: true
-  languages:
-    - name: Java
-      id: java
-      default: true
-  bootVersions:
-    - id: 2.6.3
-      name: 2.6.3
-      default: true
-    - id: 2.5.3
-      name: 2.5.3
-      default: false
-    - id: 2.4.9
-      name: 2.4.9
-      default: false
-    - id: 2.3.2.RELEASE
-      name: 2.3.2.RELEASE
-      default: false
-  group-id:
-    value: redcoder54
-  artifact-id:
-    value: my-app
-  version:
-    value: 1.0.0
+
 
 # 自定义配置，对spring initializr的补充
 custom:
